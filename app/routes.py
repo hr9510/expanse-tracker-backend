@@ -9,7 +9,9 @@ main_bp = Blueprint("main", __name__)
 @main_bp.route("/", methods=["POST"])
 def create_user():
     data = request.get_json()
-    user = ExpanseTracker(**data)
+    user = ExpanseTracker(name = data.get("name"),
+                          email = data.get("email"),
+                          password = data.get("password"))
     db.session.add(user)
     db.session.commit()
     return jsonify({"message": "User created successfully!"}), 201
@@ -76,7 +78,11 @@ def delete_login_user():
 @main_bp.route("/add-expanse", methods=["POST"])
 def add_expense():
     data = request.get_json()
-    expense = Expanses(**data)
+    expense = Expanses(title = data.get("title"),
+                      earn = data.get("earn"),
+                      spend = data.get("spend"),
+                      totalBalance = data.get("totalBalance"),
+                      email = data.get("email"))
     db.session.add(expense)
     db.session.commit()
     return jsonify({"message": "Expense added successfully!"}), 201

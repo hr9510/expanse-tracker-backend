@@ -12,7 +12,7 @@ class ExpanseTracker(db.Model):
         return {c: getattr(self, c) for c in inspect(self).attrs.keys()}
     
 class Expanses(db.Model):
-    __tablename__ = 'user-expanses'
+    __tablename__ = 'user_expanses'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     earn = db.Column(db.Integer, nullable=False)
